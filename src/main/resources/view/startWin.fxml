@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane fx:id="winPane" prefHeight="800.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="me.lerndonmac.controls.StartWinController">
+   <children>
+      <Label fx:id="openSetingsText" alignment="CENTER" contentDisplay="CENTER" layoutX="200.0" layoutY="91.0" text="Setings" textAlignment="CENTER" textFill="#9277ff" AnchorPane.leftAnchor="200.0" AnchorPane.rightAnchor="200.0">
+         <font>
+            <Font size="20.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Label>
+      <Label fx:id="openAlarmsText" alignment="CENTER" contentDisplay="CENTER" layoutX="200.0" layoutY="61.0" text="Alarms" textAlignment="CENTER" textFill="#9277ff" AnchorPane.leftAnchor="200.0" AnchorPane.rightAnchor="200.0">
+         <font>
+            <Font size="20.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Label>
+      <Label fx:id="openAboutText" alignment="CENTER" contentDisplay="CENTER" layoutX="194.0" layoutY="131.0" text="About" textAlignment="CENTER" textFill="#cec4fc" AnchorPane.leftAnchor="200.0" AnchorPane.rightAnchor="200.0">
+         <font>
+            <Font size="20.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Label>
+      <Label fx:id="exitText" alignment="CENTER" contentDisplay="CENTER" layoutX="200.0" layoutY="187.0" text="Exit" textAlignment="CENTER" textFill="RED" AnchorPane.leftAnchor="200.0" AnchorPane.rightAnchor="200.0">
+         <font>
+            <Font size="20.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Label>
+      <Text layoutX="14.0" layoutY="282.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Atantion" textAlignment="CENTER" wrappingWidth="600.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+         <font>
+            <Font size="22.0" />
+         </font>
+      </Text>
+      <TextArea editable="false" layoutY="290.0" prefHeight="200.0" prefWidth="600.0" text="this program is created as a test of its capabilities in the development of standalone widgets and do not expect too much" wrapText="true">
+         <font>
+            <Font name="System Bold Italic" size="25.0" />
+         </font>
+      </TextArea>
+   </children>
+</AnchorPane>
