@@ -2,8 +2,9 @@ package me.lerndonmac.model;
 
 import lombok.*;
 
-import java.io.File;
+import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Set;
 
 @Getter@Setter
 @NoArgsConstructor
@@ -14,17 +15,22 @@ public class Alarms {
     private String name;
 @NonNull
     private Date time;
-    private String soundPath;
 @NonNull
     private Boolean active;
+    private String question;
+    private Set<SubAlarm> subAlarms;
 
-public String getSound(){
-    File file = new File(getSoundPath());
-    return file.getName();
-}
+    public String getTimeForOut(){
+        SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
+        return sdf.format(getTime());
+    }
+
 
     @Override
     public String toString() {
-        return name +'\''+ time  +'\''+ soundPath  +'\''+ getActive() +"\n" ;
+        String active;
+        if (getActive())active = "1";
+        else active = "0";
+        return getName() +'\''+ getTimeForOut() +'\''+ active +"\n" ;
     }
 }

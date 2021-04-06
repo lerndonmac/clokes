@@ -18,16 +18,5 @@
             <artifactId>lombok</artifactId>
             <version>1.18.16</version>
         </dependency>
-        <dependency>
-            <groupId>org.openjfx</groupId>
-            <artifactId>javafx-base</artifactId>
-            <version>15.0.1</version>
-        </dependency>
-        <dependency>
-            <groupId>org.openjfx</groupId>
-            <artifactId>javafx-fxml</artifactId>
-            <version>15.0.1</version>
-        </dependency>
     </dependencies>
-
 </project>

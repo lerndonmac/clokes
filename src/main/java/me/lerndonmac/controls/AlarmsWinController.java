@@ -10,6 +10,8 @@ import javafx.scene.layout.TilePane;
 import me.lerndonmac.model.Alarms;
 
 import java.io.*;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class AlarmsWinController {
@@ -62,7 +64,10 @@ public class AlarmsWinController {
                 countOfAlarms++;
                 String alarm = reader.readLine();
                 String[] alarmParams = alarm.split("'");
+                SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
                 Date date = new Date();
+                date.setHours(sdf.parse(alarmParams[1]).getHours());
+                date.setMinutes(sdf.parse(alarmParams[1]).getMinutes());
                 Alarms alarms = new Alarms(alarmParams[0], date, Boolean.getBoolean(alarmParams[2]));
                 if (alarmParams[2].equals("1")) {
                     alarms.setActive(true);
@@ -70,7 +75,7 @@ public class AlarmsWinController {
                 alarmsObserv.add(alarms);
             }
 
-        } catch (IOException e) {
+        } catch (IOException | ParseException e) {
             e.printStackTrace();
         }
     }
