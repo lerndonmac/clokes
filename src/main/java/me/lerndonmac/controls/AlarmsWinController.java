@@ -12,6 +12,7 @@ import me.lerndonmac.model.Alarms;
 import java.io.*;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Comparator;
 import java.util.Date;
 
 public class AlarmsWinController {
@@ -78,6 +79,7 @@ public class AlarmsWinController {
         } catch (IOException | ParseException e) {
             e.printStackTrace();
         }
+        alarmsObserv.sort(Comparator.comparing(Alarms::getTime));
     }
     public void initCels(){
         for (Alarms alarm : alarmsObserv){

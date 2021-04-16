@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.effect.Reflection?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Arc?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane fx:id="winPane" maxHeight="800.0" maxWidth="600.0" minHeight="800.0" minWidth="600.0" prefHeight="800.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="me.lerndonmac.controls.SetingsControl">
+   <Text fx:id="eyeProtectionActivator" fill="RED" layoutX="14.0" layoutY="137.0" strokeType="OUTSIDE" strokeWidth="0.0" text="уведомления об отдыхе" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="114.3388671875">
+      <font>
+         <Font size="21.0" />
+      </font>
+      <effect>
+         <Reflection fraction="0.4" topOffset="1.0" topOpacity="0.54" />
+      </effect>
+   </Text>
+   <CheckBox fx:id="eyeProtectionChek" layoutX="556.0" layoutY="114.0" mnemonicParsing="false" AnchorPane.rightAnchor="28.0" AnchorPane.topAnchor="114.0">
+      <cursor>
+         <Cursor fx:constant="HAND" />
+      </cursor>
+      <effect>
+         <Reflection />
+      </effect>
+   </CheckBox>
+   <TextField fx:id="eyeProtectionTxt" layoutX="351.0" layoutY="119.0" AnchorPane.leftAnchor="351.0" AnchorPane.rightAnchor="100.0" AnchorPane.topAnchor="119.0">
+      <effect>
+         <Reflection bottomOpacity="0.19" fraction="1.0" topOpacity="1.0" />
+      </effect>
+   </TextField>
+   <Text layoutX="260.0" layoutY="136.0" strokeType="OUTSIDE" strokeWidth="0.0" text="интервал:" AnchorPane.leftAnchor="260.0" AnchorPane.topAnchor="114.41796875">
+      <font>
+         <Font size="20.0" />
+      </font>
+      <effect>
+         <Reflection fraction="0.4" topOffset="1.0" topOpacity="0.54" />
+      </effect>
+   </Text>
+   <Text fx:id="startUpActivator" layoutX="14.0" layoutY="309.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Запуска вместе с Windows:" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="286.3388671875">
+      <font>
+         <Font size="21.0" />
+      </font>
+      <effect>
+         <Reflection fraction="0.4" topOffset="1.0" topOpacity="0.54" />
+      </effect>
+   </Text>
+   <Text fx:id="shutDownActivator" fill="#504c75" layoutX="14.0" layoutY="492.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Автоматическое отключение компьютера:" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="469.3388671875">
+      <font>
+         <Font size="21.0" />
+      </font>
+      <effect>
+         <Reflection fraction="0.4" topOffset="1.0" topOpacity="0.54" />
+      </effect>
+   </Text>
+   <Rectangle arcHeight="30.0" arcWidth="30.0" fill="#504c75" height="65.0" layoutY="633.0" stroke="#f2f2f2" strokeType="INSIDE" width="600.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="633.0">
+      <effect>
+         <DropShadow />
+      </effect>
+   </Rectangle>
+   <ChoiceBox fx:id="shutDownHoursTxt" layoutX="143.0" layoutY="639.0" prefWidth="150.0" AnchorPane.leftAnchor="143.0" AnchorPane.rightAnchor="307.0" AnchorPane.topAnchor="639.0">
+      <effect>
+         <Reflection fraction="0.4" topOffset="1.0" topOpacity="0.54" />
+      </effect>
+   </ChoiceBox>
+   <ChoiceBox fx:id="shutDownMinetsTxt" layoutX="307.0" layoutY="639.0" prefWidth="150.0" AnchorPane.leftAnchor="307.0" AnchorPane.rightAnchor="143.0" AnchorPane.topAnchor="639.0">
+      <effect>
+         <Reflection fraction="0.4" topOffset="1.0" topOpacity="0.54" />
+      </effect>
+   </ChoiceBox>
+   <CheckBox fx:id="shutDownChek" layoutX="556.0" layoutY="476.0" mnemonicParsing="false" AnchorPane.rightAnchor="28.0" AnchorPane.topAnchor="476.0">
+      <effect>
+         <Reflection fraction="0.4" topOffset="1.0" topOpacity="0.54" />
+      </effect>
+   </CheckBox>
+   <CheckBox fx:id="startUpChek" layoutX="556.0" layoutY="293.0" mnemonicParsing="false" AnchorPane.rightAnchor="28.0" AnchorPane.topAnchor="293.0">
+      <effect>
+         <Reflection fraction="0.4" topOffset="1.0" topOpacity="0.54" />
+      </effect>
+   </CheckBox>
+   <Text layoutX="238.0" layoutY="41.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Настройки" AnchorPane.leftAnchor="238.0" AnchorPane.rightAnchor="238.0" AnchorPane.topAnchor="15.0">
+      <font>
+         <Font size="25.0" />
+      </font>
+   </Text>
+   <Text fill="#00ff33" layoutX="299.0" layoutY="656.0" strokeType="OUTSIDE" strokeWidth="0.0" text=":" AnchorPane.leftAnchor="299.0" AnchorPane.rightAnchor="298.3984375" AnchorPane.topAnchor="643.05078125" />
+   <Text fill="RED" layoutX="205.0" layoutY="688.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Часы" />
+   <Text fill="RED" layoutX="360.0" layoutY="688.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Минуты" />
+   <Arc fx:id="easterEgg" fill="#ff1f1f" layoutX="37.0" layoutY="664.0" length="270.0" radiusX="30.0" radiusY="28.0" startAngle="45.0" stroke="#007bff" strokeType="INSIDE" type="ROUND" visible="false" />
+   <Text layoutX="457.0" layoutY="160.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Минут" />
+   <TextArea fx:id="eyeProtectionRealize" layoutX="14.0" layoutY="155.0" prefHeight="136.0" prefWidth="239.0" text="   Задание интервала между&#10;сигналами о том, что пора&#10;   отдохнуть от компьютера&#10;и включение/выключение&#10;   данной функции&#10;" visible="false">
+      <font>
+         <Font size="15.0" />
+      </font>
+      <effect>
+         <DropShadow />
+      </effect>
+   </TextArea>
+   <TextArea fx:id="startUpRealize" layoutX="14.0" layoutY="330.0" prefHeight="136.0" prefWidth="258.0" text="Данный параметр отвечает за&#10;  то, что при включении вашего &#10;компьютера будет &#10;  автоматически запущена и &#10;сама программа&#10;" visible="false">
+      <font>
+         <Font name="Century" size="15.0" />
+      </font>
+      <effect>
+         <DropShadow />
+      </effect>
+   </TextArea>
+   <TextArea fx:id="shutDownRealize" layoutX="14.0" layoutY="515.0" prefHeight="104.0" prefWidth="412.0" text="    Автоматическое отключение компьютера отвечает,&#10;за то чтобы в назначенное вами снизу время &#10;    компьютер автоматически выключился" visible="false">
+      <font>
+         <Font name="Century" size="15.0" />
+      </font>
+      <effect>
+         <DropShadow />
+      </effect>
+   </TextArea>
+   <TextArea fx:id="easterEggRealize" layoutX="-1.0" layoutY="698.0" prefHeight="104.0" prefWidth="600.0" text=" ^&#10;  |  а это просто пакмен" visible="false">
+      <font>
+         <Font size="21.0" />
+      </font>
+      <effect>
+         <DropShadow />
+      </effect>
+   </TextArea>
+   <Circle fx:id="easterEggActivator" fill="DODGERBLUE" layoutX="586.0" layoutY="684.0" radius="8.0" stroke="BLACK" strokeType="INSIDE" />
+</AnchorPane>

@@ -25,6 +25,9 @@ public class Alarms {
         return sdf.format(getTime());
     }
 
+    public Date getTime() {
+        return time;
+    }
 
     @Override
     public String toString() {

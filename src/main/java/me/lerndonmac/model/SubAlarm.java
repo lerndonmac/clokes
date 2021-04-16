@@ -14,4 +14,5 @@ import java.util.Date;
 public class SubAlarm {
     private String name;
     private Date timeOfCall;
+    private Boolean active;
 }

@@ -10,7 +10,6 @@ import javafx.scene.effect.Shadow;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
-import javafx.scene.paint.Paint;
 import javafx.stage.Stage;
 
 import java.io.*;
@@ -31,11 +30,8 @@ public class StartWinController {
 
     @FXML
     public void initialize(){
-
-
         initButtons();
         initStyles();
-
     }
     private void initButtons(){ // yes Buttons
         openAlarmsText.setOnMouseClicked(mouseEvent -> {
@@ -51,7 +47,18 @@ public class StartWinController {
                 e.printStackTrace();
             }
         });
-        openSetingsText.setOnMouseClicked(mouseEvent ->{});
+        openSetingsText.setOnMouseClicked(mouseEvent ->{
+            Stage stage = new Stage();
+            try {
+                Parent root = FXMLLoader.load(getClass().getResource("/view/setingsWin.fxml"));
+                stage.setScene(new Scene(root));
+                stage.getIcons().add(new Image(getClass().getResourceAsStream("/images/clokesImg.png")));
+                stage.setTitle("Setings");
+                stage.show();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        });
         openAboutText.setOnMouseClicked(mouseEvent ->{});
 
         exitText.setOnMouseClicked(mouseEvent -> exitText.getScene().getWindow().hide());
