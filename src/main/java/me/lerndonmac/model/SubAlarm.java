@@ -12,7 +12,10 @@ import java.util.Date;
 @NoArgsConstructor
 @AllArgsConstructor
 public class SubAlarm {
+
     private String name;
+
     private Date timeOfCall;
+
     private Boolean active;
 }

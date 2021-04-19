@@ -5,13 +5,17 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
+import me.lerndonmac.alarmsLogic.AlarmLogic;
+import me.lerndonmac.alarmsLogic.NotificationLogic;
+import me.lerndonmac.controls.AlarmViewController;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.io.IOException;
 
 public class Main extends Application {
-    private Stage stage;//it's too
+    public static Stage stage;//it's too
+    private AlarmLogic logic = new AlarmLogic();
 
     public void startProgramm() {
         Parent root = null;
@@ -28,15 +32,13 @@ public class Main extends Application {
 
     }// it's all to start window
     public static void startWindow(String[] args) {
+
         launch(args);
-//        LoadThread logic = new LoadThread();
-//        logic.start();
     }// it's all to start window
     //-what, it's was possible? -maybe, but it's work
-    private void initTrey() throws IOException, AWTException {
-        MainAlarmsLogic logic = new MainAlarmsLogic();
-        logic.runLogic();
+    private void initTrey() {
         try {
+            startProgramm();
             java.awt.Toolkit.getDefaultToolkit();
             if (!java.awt.SystemTray.isSupported()) {
                 System.out.println("loh");
@@ -69,6 +71,11 @@ public class Main extends Application {
         }catch (java.awt.AWTException | IOException e) {
             e.printStackTrace();
         }
+
+        Platform.runLater(NotificationLogic::startNotifLogic);
+        NotificationLogic.localStage = stage;
+        Platform.runLater(logic::runLogic);
+        AlarmLogic.localStage = stage;
     }
     private void showStage() {//combining javafx and java awt; it's can to named so
         if (stage != null) {
@@ -79,9 +86,22 @@ public class Main extends Application {
     }
 
 
-    public void start(Stage stage) throws Exception {
-        this.stage = stage;
+    public void start(Stage stage) {
+        Main.stage = stage;
         initTrey();
     }// it's all to start window
+    public static void startAlarm(Stage stage) {
+        Parent root = null;
+        FXMLLoader loader = new FXMLLoader(Main.class.getResource("/view/alarmView.fxml"));
+        AlarmViewController controller = loader.getController();
+        try {
+            root = loader.load();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        stage.setScene(new Scene(root));
+        stage.show();
+        stage.toFront();
+    }
 
 }

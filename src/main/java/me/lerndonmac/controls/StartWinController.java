@@ -12,7 +12,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
-import java.io.*;
+import java.io.IOException;
 
 public class StartWinController {
 

@@ -16,6 +16,7 @@ public class Alarms {
 @NonNull
     private Date time;
 @NonNull
+
     private Boolean active;
     private String question;
     private Set<SubAlarm> subAlarms;
@@ -34,6 +35,6 @@ public class Alarms {
         String active;
         if (getActive())active = "1";
         else active = "0";
-        return getName() +'\''+ getTimeForOut() +'\''+ active +"\n" ;
+        return getName() +'\''+ getTimeForOut() +'\''+ active +'\''+getQuestion()+"\n" ;
     }
 }

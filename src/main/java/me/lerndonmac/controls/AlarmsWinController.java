@@ -5,6 +5,7 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
+import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.TilePane;
 import me.lerndonmac.model.Alarms;
@@ -17,6 +18,7 @@ import java.util.Date;
 
 public class AlarmsWinController {
 
+    public Button addBut;
     private int countOfAlarms;
 
     private BufferedReader reader;
@@ -39,6 +41,9 @@ public class AlarmsWinController {
             exitBull = true;
             thread.start();
         }));
+        addBut.setOnAction(addEvent -> {
+
+        });
 
     }
     private void exitEvent(){
@@ -70,6 +75,9 @@ public class AlarmsWinController {
                 date.setHours(sdf.parse(alarmParams[1]).getHours());
                 date.setMinutes(sdf.parse(alarmParams[1]).getMinutes());
                 Alarms alarms = new Alarms(alarmParams[0], date, Boolean.getBoolean(alarmParams[2]));
+                if (!alarmParams[3].isEmpty()&&alarmParams[3]!=null){
+                    alarms.setQuestion(alarmParams[3]);
+                }
                 if (alarmParams[2].equals("1")) {
                     alarms.setActive(true);
                 }
