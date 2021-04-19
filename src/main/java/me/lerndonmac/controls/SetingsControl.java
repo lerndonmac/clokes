@@ -9,6 +9,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.shape.Arc;
 import javafx.scene.shape.Circle;
 import javafx.scene.text.Text;
+import me.lerndonmac.model.UserSetings;
 
 public class SetingsControl {
     @FXML
@@ -28,6 +29,8 @@ public class SetingsControl {
     private Text startUpActivator;            @FXML
     private TextArea startUpRealize;    @FXML
     private CheckBox startUpChek;              @FXML
+
+    private static UserSetings setings;
     public void initialize() throws InterruptedException {
         initHelp();
         easterEggMoment();
@@ -66,11 +69,13 @@ public class SetingsControl {
             shutDownRealize.setVisible(false);
         });
     }
+    private void initEyeProtectActions(){
+
+    }
 
     static class LoadThread extends Thread{
         @Override
         public void run(){
-
 
         }
     }

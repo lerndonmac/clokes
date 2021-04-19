@@ -1,0 +1,5 @@
+notificationMinutesInterval = 45;
+notificationActive = 1;
+startUpActive = 0;
+shutDownTime = 23:00; 
+shutDownActive = 0;
