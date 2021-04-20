@@ -8,8 +8,15 @@ import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import me.lerndonmac.model.Alarms;
+import me.lerndonmac.model.SubAlarm;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.HashSet;
+import java.util.Set;
 
 public class CellController {
     ObservableList<Integer> hours = FXCollections.observableArrayList();
@@ -31,12 +38,13 @@ public class CellController {
     @FXML
     private Button changeTimeButt;
 
-    private Alarms alarm;
+    private static Alarms localAlarm;
 
 
     public void initCell(Alarms alarm){
         initClocks();
-        this.alarm = alarm;
+        localAlarm = alarm;
+        initSubList();
         alarmNameText.setText(alarm.getName());
         activeChoseBox.setSelected(alarm.getActive());
 //        soundNameText.setText(alarm.getSound());
@@ -63,5 +71,31 @@ public class CellController {
         }
         hoursCombo.setItems(hours);
         minetsCombo.setItems(minets);
+    }
+    private static Set<SubAlarm> subAlarms = new HashSet<>();
+    private static void initSubList(){
+        try {
+            BufferedReader reader = new BufferedReader(new FileReader(SubAlarm.class.getResource("/alarms/subAlarmsList0.alttx").getFile()));
+            while (reader.ready()){
+                String oneLine = reader.readLine(); //defoult1;subDefoult1'03:20|subDefoult2'04:00
+                String alarmName = oneLine.split(";")[0];//defoult1
+
+                if (localAlarm.getName().equals(alarmName)) {
+                    String[] subsAlarms = oneLine.split(";")[1].split("\\|");//[subDefoult1'03:20][subDefoult2'04:00]
+                    subAlarms = new HashSet<>();
+
+                    for (String subTxt : subsAlarms) {
+
+                        String[] subParams = subTxt.split("'");//[subDefoult1][03:20]
+                        SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
+                        subAlarms.add(new SubAlarm(subParams[0], sdf.parse(subParams[1])));
+                    }
+                }
+            }
+            System.out.println(subAlarms);
+            localAlarm.setSubAlarms(subAlarms);
+        } catch (IOException | ParseException e) {
+            e.printStackTrace();
+        }
     }
 }
