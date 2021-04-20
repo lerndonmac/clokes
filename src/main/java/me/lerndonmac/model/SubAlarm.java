@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 @Getter
@@ -18,4 +19,19 @@ public class SubAlarm {
     private Date timeOfCall;
 
     private Boolean active;
+
+    public SubAlarm(String name, Date timeOfCall) {
+        this.name = name;
+        this.timeOfCall = timeOfCall;
+    }
+
+    public String getTimeForOut(){
+        SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
+        return sdf.format(getTimeOfCall());
+    }
+
+    @Override
+    public String toString() {
+        return getName();
+    }
 }
