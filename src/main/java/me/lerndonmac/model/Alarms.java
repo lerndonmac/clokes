@@ -19,6 +19,7 @@ public class Alarms {
 
     private Boolean active;
     private String question;
+
     private Set<SubAlarm> subAlarms;
 
     public String getTimeForOut(){
@@ -35,6 +36,14 @@ public class Alarms {
         String active;
         if (getActive())active = "1";
         else active = "0";
-        return getName() +'\''+ getTimeForOut() +'\''+ active +'\''+getQuestion()+"\n" ;
+        String subs = "";
+        if (getSubAlarms().isEmpty())
+        {
+            return getName() +'\''+ getTimeForOut() +'\''+ active +'\''+getQuestion()+"\n" ;
+        }
+        for (SubAlarm sub : getSubAlarms()){
+            subs = subs + sub.getName() +'\''+ sub.getTimeForOut() + '"'; // "-между сабами ;-между Классами '-между полями
+        }
+        return getName() +'\''+ getTimeForOut() +'\''+ active +'\''+getQuestion()+';'+ subs + '\n' ;
     }
 }

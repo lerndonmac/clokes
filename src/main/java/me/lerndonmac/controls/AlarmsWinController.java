@@ -37,24 +37,19 @@ public class AlarmsWinController {
             Thread.sleep(100);
         }
         initCels();
-        scrollPane.parentProperty().addListener((observableValue, parent, t1) -> t1.getScene().getWindow().setOnCloseRequest(windowEvent -> {
+        scrollPane.getContent().getScene().getWindow().setOnCloseRequest(windowEvent -> {
             exitBull = true;
-            thread.start();
-        }));
+            exitEvent();
+        });
         addBut.setOnAction(addEvent -> {
 
         });
 
     }
     private void exitEvent(){
-        try {
-            writer = new FileWriter(getClass().getResource("/alarms/alarmlist0.alttx").getFile());
-            PrintWriter clearWriter = new PrintWriter(getClass().getResource("/alarms/alarmlist0.alttx").getFile());
-            clearWriter.print("");
-            clearWriter.close();
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(getClass().getResource("/alarms/alarmlist0.alttx").getFile()));){
             for (Alarms alarms : alarmsObserv) {
                 writer.write(alarms.toString());
-                writer.close();
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -70,7 +65,9 @@ public class AlarmsWinController {
                 countOfAlarms++;
                 String alarm = reader.readLine();
                 String[] alarmParams = alarm.split("'");
+
                 SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
+
                 Date date = new Date();
                 date.setHours(sdf.parse(alarmParams[1]).getHours());
                 date.setMinutes(sdf.parse(alarmParams[1]).getMinutes());
@@ -89,6 +86,7 @@ public class AlarmsWinController {
         }
         alarmsObserv.sort(Comparator.comparing(Alarms::getTime));
     }
+
     public void initCels(){
         for (Alarms alarm : alarmsObserv){
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/cell.fxml"));
@@ -111,10 +109,7 @@ public class AlarmsWinController {
 
         @Override
         public void run(){
-            if (!exitBull){
                 initList();
-            }else {exitEvent();}
-
         }
     }
 

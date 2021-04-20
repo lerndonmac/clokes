@@ -40,7 +40,7 @@ public class AlarmLogic extends Application {
                     timer.start();
 
                     this.alarm = alarm;
-                    AlarmViewController.alarm = this.alarm;
+                    AlarmViewController.setAlarm(this.alarm);
 
                     break;
                 }
