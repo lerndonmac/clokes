@@ -11,6 +11,8 @@ import javafx.scene.shape.Circle;
 import javafx.scene.text.Text;
 import me.lerndonmac.model.UserSetings;
 
+import java.io.*;
+
 public class SetingsControl {
     @FXML
     private AnchorPane winPane;        @FXML
@@ -30,7 +32,7 @@ public class SetingsControl {
     private TextArea startUpRealize;    @FXML
     private CheckBox startUpChek;              @FXML
 
-    private static UserSetings setings;
+    private static UserSetings localSetings;
     public void initialize() throws InterruptedException {
         initHelp();
         easterEggMoment();
@@ -40,6 +42,18 @@ public class SetingsControl {
         while (load.isAlive()){
             Thread.sleep(100);
         }
+        initWindow();
+        initChanges();
+    }
+    private void initWindow(){
+        this.shutDownChek.setSelected(localSetings.getShutDownActive());
+        this.shutDownMinetsTxt.setValue(localSetings.getShutDownTime().getMinutes());
+        this.shutDownHoursTxt.setValue(localSetings.getShutDownTime().getHours());
+
+        this.eyeProtectionChek.setSelected(localSetings.getNotificationActive());
+        this.eyeProtectionTxt.setText(String.valueOf(localSetings.getNotificationMinutesInterval()));
+
+        this.startUpChek.setSelected(localSetings.getStartUpActive());
     }
     private void initBoxes(){
         for (int i = 0; i < 24; i++) {
@@ -69,14 +83,61 @@ public class SetingsControl {
             shutDownRealize.setVisible(false);
         });
     }
-    private void initEyeProtectActions(){
-
+    private static void initSettings(){
+        try {
+            BufferedReader reader = new BufferedReader(new FileReader(SetingsControl.class.getResource("/config/setings.cfg.alttx").getFile()));
+            String setings =  reader.readLine();
+            localSetings = new UserSetings(setings);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
+    private void initChanges(){
+        DeployThread deploadThread = new DeployThread();
+        this.shutDownChek.selectedProperty().addListener(((observableValue, aBoolean, newB) -> {
+            localSetings.setShutDownActive(newB);
+           updateSettings();
+        }));
+        this.shutDownMinetsTxt.valueProperty().addListener((observableValue, integer, newInt) -> {
+            localSetings.getShutDownTime().setMinutes(newInt);
+           updateSettings();
+        });
+        this.shutDownHoursTxt.valueProperty().addListener((observableValue, integer, newInt) -> {
+            localSetings.getShutDownTime().setHours(newInt);
+           updateSettings();
+        });
 
-    static class LoadThread extends Thread{
+        this.eyeProtectionChek.selectedProperty().addListener((observableValue, aBoolean, newB) ->{
+            localSetings.setNotificationActive(newB);
+           updateSettings();
+        } );
+        this.eyeProtectionTxt.setOnAction(actionEvent -> {
+            localSetings.setNotificationMinutesInterval(Integer.parseInt(eyeProtectionTxt.getText()));
+           updateSettings();
+        });
+
+        this.startUpChek.selectedProperty().addListener((observableValue, aBoolean, newB) -> {
+            localSetings.setStartUpActive(newB);
+           updateSettings();
+        });
+    }
+    private static void updateSettings(){
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(SetingsControl.class.getResource("/config/setings.cfg.alttx").getFile()))){
+            writer.write(localSetings.toFileStr());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    private static class DeployThread extends Thread{
         @Override
         public void run(){
-
+            updateSettings();
+        }
+    }
+    private static class LoadThread extends Thread{
+        @Override
+        public void run(){
+            initSettings();
         }
     }
 
