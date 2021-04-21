@@ -20,17 +20,19 @@ public class NotificationLogic extends Application {
     public static void startNotifLogic(){
         System.out.println("notif start");
         initSetings();
+        if(notifSeting.getNotificationActive()) {
+            Thread timerThread = new Thread(() -> {
+                try {
+                    System.out.println("notif is active");
+                    Thread.sleep(notifSeting.getNotificationMinutesInterval() * 60000L);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                Platform.runLater(NotificationLogic::showStage);
+            }); // отдельный поток чтобы не останавливать fx поток при исспользовании таймера
 
-        Thread timerThread = new Thread(() -> {
-            try {
-                Thread.sleep(notifSeting.getNotificationMinutesInterval() * 60000L);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-            Platform.runLater(NotificationLogic::showStage);
-        }); // отдельный поток чтобы не останавливать fx поток при исспользовании таймера
-        timerThread.setName("timerThread");
-        timerThread.start();
+            timerThread.start();
+        }
     }
     private static void initSetings(){
         try(BufferedReader reader = new BufferedReader(new FileReader(NotificationLogic.class.getResource("/config/setings.cfg.alttx").getFile()));) {
