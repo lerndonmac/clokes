@@ -9,70 +9,66 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-
-<AnchorPane prefHeight="230.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/15.0.1"
-            xmlns:fx="http://javafx.com/fxml/1" fx:controller="me.lerndonmac.controls.AddAlarmController">
+<AnchorPane prefHeight="230.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="me.lerndonmac.controls.AddAlarmController">
     <TextField fx:id="alarmNameText" layoutX="85.0" layoutY="35.0" prefWidth="250.0">
         <font>
-          <Font size="20.0"/>
+          <Font size="20.0" />
         </font>
     </TextField>
     <TextField fx:id="alarmQuestText" layoutX="85.0" layoutY="151.0" prefHeight="44.0" prefWidth="250.0">
         <font>
-          <Font size="20.0"/>
+          <Font size="20.0" />
         </font>
     </TextField>
-    <ComboBox fx:id="alarmHoursBox" layoutX="85.0" layoutY="106.0" prefHeight="25.0" prefWidth="120.0"
-              visibleRowCount="5">
+    <ComboBox fx:id="alarmHoursBox" layoutX="85.0" layoutY="106.0" prefHeight="25.0" prefWidth="120.0" visibleRowCount="5">
         <cursor>
-          <Cursor fx:constant="HAND"/>
+          <Cursor fx:constant="HAND" />
         </cursor>
     </ComboBox>
-    <ComboBox fx:id="alarmMinutesBox" layoutX="215.0" layoutY="106.0" prefHeight="25.0" prefWidth="120.0"
-              visibleRowCount="5">
+    <ComboBox fx:id="alarmMinutesBox" layoutX="215.0" layoutY="106.0" prefHeight="25.0" prefWidth="120.0" visibleRowCount="5">
         <cursor>
-          <Cursor fx:constant="HAND"/>
+          <Cursor fx:constant="HAND" />
         </cursor>
     </ComboBox>
     <Text layoutX="208.0" layoutY="122.0" strokeType="OUTSIDE" strokeWidth="0.0" text=":">
         <font>
-          <Font size="15.0"/>
+          <Font size="15.0" />
         </font>
     </Text>
-    <Text layoutX="23.0" layoutY="63.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Названи">
+    <Text layoutX="19.0" layoutY="63.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Название">
         <font>
-          <Font size="15.0"/>
+          <Font size="15.0" />
         </font>
     </Text>
     <Text layoutX="341.0" layoutY="63.0" strokeType="OUTSIDE" strokeWidth="0.0" text="название">
         <font>
-          <Font size="15.0"/>
+          <Font size="15.0" />
         </font>
     </Text>
     <Text layoutX="27.0" layoutY="179.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Вопрос">
         <font>
-          <Font size="15.0"/>
+          <Font size="15.0" />
         </font>
     </Text>
     <Text layoutX="342.0" layoutY="179.0" strokeType="OUTSIDE" strokeWidth="0.0" text="вопрос">
         <font>
-          <Font size="15.0"/>
+          <Font size="15.0" />
         </font>
     </Text>
     <Text layoutX="47.0" layoutY="124.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Часы">
         <font>
-          <Font size="15.0"/>
+          <Font size="15.0" />
         </font>
     </Text>
     <Text layoutX="341.0" layoutY="124.0" strokeType="OUTSIDE" strokeWidth="0.0" text="минуты">
         <font>
-          <Font size="15.0"/>
+          <Font size="15.0" />
         </font>
     </Text>
     <Button fx:id="addButt" layoutX="452.0" layoutY="97.0" mnemonicParsing="false" text="Добавить">
         <font>
-          <Font size="20.0"/>
+          <Font size="20.0" />
         </font>
     </Button>
-    <Line endX="-30.0" endY="207.99998474121094" layoutX="461.0" layoutY="22.0" startX="-30.0" startY="-22.0"/>
+    <Line endX="-30.0" endY="207.99998474121094" layoutX="461.0" layoutY="22.0" startX="-30.0" startY="-22.0" />
 </AnchorPane>

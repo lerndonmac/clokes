@@ -3,24 +3,26 @@ package me.lerndonmac.controls;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 import me.lerndonmac.model.Alarms;
-import me.lerndonmac.model.SubAlarm;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
 import java.io.IOException;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.HashSet;
-import java.util.Set;
 
 public class CellController {
-    ObservableList<Integer> hours = FXCollections.observableArrayList();
-    ObservableList<Integer> minets = FXCollections.observableArrayList();
+    private final ObservableList<Integer> hours = FXCollections.observableArrayList();
+    private final ObservableList<Integer> minets = FXCollections.observableArrayList();
     @FXML
     private ComboBox<Integer> hoursCombo;
     @FXML
@@ -32,22 +34,102 @@ public class CellController {
     @FXML
     private TextField alarmNameText;
     @FXML
-    private TextField soundNameText;
+    private Button editSubAlarmsButt;
+
+    private Alarms localAlarm;
+
     @FXML
-    private Button selectSoundButt;
-    @FXML
-    private Button changeTimeButt;
+    public void initialize(){
+        initButs();
 
-    private static Alarms localAlarm;
+    }
+    private void initButs(){
+        deleteButt.setOnAction(actionEvent -> {
+            AlarmsWinController.getAlarmsObserv().remove(localAlarm);
+            update(AlarmsWinController.getAlarmsObserv());
+            reloadWin();
+        });
+        activeChoseBox.setOnAction(actionEvent -> {
+            AlarmsWinController.getAlarmsObserv().remove(localAlarm);
+            localAlarm.setActive(!localAlarm.getActive());
+            AlarmsWinController.getAlarmsObserv().add(localAlarm);
+            update(AlarmsWinController.getAlarmsObserv());
+            reloadWin();
 
+        });
+        hoursCombo.setOnAction((event) -> {
+            AlarmsWinController.getAlarmsObserv().remove(localAlarm);
+            localAlarm.setHours(hoursCombo.getValue());
+            AlarmsWinController.getAlarmsObserv().add(localAlarm);
+            update(AlarmsWinController.getAlarmsObserv());
+            reloadWin();
 
+        });
+        minetsCombo.setOnAction((event) -> {
+            AlarmsWinController.getAlarmsObserv().remove(localAlarm);
+            localAlarm.setMinutes(minetsCombo.getValue());
+            AlarmsWinController.getAlarmsObserv().add(localAlarm);
+            update(AlarmsWinController.getAlarmsObserv());
+            reloadWin();
+
+        });
+        alarmNameText.setOnAction((actionEvent) -> {
+            AlarmsWinController.getAlarmsObserv().remove(localAlarm);
+            localAlarm.setName(alarmNameText.getText());
+            AlarmsWinController.getAlarmsObserv().add(localAlarm);
+            update(AlarmsWinController.getAlarmsObserv());
+            reloadWin();
+
+        });
+        editSubAlarmsButt.setOnAction(actionEvent -> {
+            SubAlarmEditeController.setAlarm(localAlarm);
+            Stage stage = new Stage();
+            try {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/subAlarmEditWin.fxml"));
+                Parent root = loader.load();
+
+                stage.setScene(new Scene(root));
+                stage.getIcons().add(new Image(getClass().getResourceAsStream("/images/clokesImg.png")));
+                stage.setTitle("Sub alarms");
+                stage.initModality(Modality.APPLICATION_MODAL);
+                stage.showAndWait();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+        });
+    }
+    private void reloadWin(){
+        hoursCombo.getScene().getWindow().hide();
+        Stage stage = new Stage();
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/alarmsList.fxml"));
+
+            Parent root = loader.load();
+            stage.setScene(new Scene(root));
+            stage.getIcons().add(new Image(getClass().getResourceAsStream("/images/clokesImg.png")));
+            stage.setTitle("alarms");
+            stage.show();
+            AlarmsWinController.setLocalController(loader.getController());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    private void update(ObservableList<Alarms> alarmsList){
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(CellController.class.getResource("/alarms/alarmlist0.alttx").getFile()))){
+            for (Alarms alarm : alarmsList){
+                writer.write(alarm.toString());
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
     public void initCell(Alarms alarm){
         initClocks();
         localAlarm = alarm;
-        initSubList();
+
         alarmNameText.setText(alarm.getName());
         activeChoseBox.setSelected(alarm.getActive());
-//        soundNameText.setText(alarm.getSound());
         SimpleDateFormat sdfH = new SimpleDateFormat("HH");
         SimpleDateFormat sdfM = new SimpleDateFormat("mm");
         for (Integer hour:hours){
@@ -60,7 +142,6 @@ public class CellController {
                 minetsCombo.setValue(minet);
             }
         }
-
     }
     private void initClocks(){
         for (int i = 0; i < 24; i++) {
@@ -72,30 +153,5 @@ public class CellController {
         hoursCombo.setItems(hours);
         minetsCombo.setItems(minets);
     }
-    private static Set<SubAlarm> subAlarms = new HashSet<>();
-    private static void initSubList(){
-        try {
-            BufferedReader reader = new BufferedReader(new FileReader(SubAlarm.class.getResource("/alarms/subAlarmsList0.alttx").getFile()));
-            while (reader.ready()){
-                String oneLine = reader.readLine(); //defoult1;subDefoult1'03:20|subDefoult2'04:00
-                String alarmName = oneLine.split(";")[0];//defoult1
 
-                if (localAlarm.getName().equals(alarmName)) {
-                    String[] subsAlarms = oneLine.split(";")[1].split("\\|");//[subDefoult1'03:20][subDefoult2'04:00]
-                    subAlarms = new HashSet<>();
-
-                    for (String subTxt : subsAlarms) {
-
-                        String[] subParams = subTxt.split("'");//[subDefoult1][03:20]
-                        SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
-                        subAlarms.add(new SubAlarm(subParams[0], sdf.parse(subParams[1])));
-                    }
-                }
-            }
-            System.out.println(subAlarms);
-            localAlarm.setSubAlarms(subAlarms);
-        } catch (IOException | ParseException e) {
-            e.printStackTrace();
-        }
-    }
 }

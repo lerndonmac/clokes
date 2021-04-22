@@ -25,9 +25,21 @@ public class SubAlarm {
         this.timeOfCall = timeOfCall;
     }
 
+    public boolean isNull(){
+        return timeOfCall == null&&name == null;
+    }
+
+
     public String getTimeForOut(){
         SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
         return sdf.format(getTimeOfCall());
+    }
+    public void setHours(Integer hour){
+        timeOfCall.setHours(hour);
+    }
+
+    public void setMinutes(Integer minutes){
+        timeOfCall.setMinutes(minutes);
     }
 
     @Override

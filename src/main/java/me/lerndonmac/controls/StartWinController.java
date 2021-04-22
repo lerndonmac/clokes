@@ -37,12 +37,14 @@ public class StartWinController {
         openAlarmsText.setOnMouseClicked(mouseEvent -> {
             Stage stage = new Stage();
             try {
-                openAlarmsText.getScene().getWindow().hide();
-                Parent root = FXMLLoader.load(getClass().getResource("/view/alarmsList.fxml"));
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/alarmsList.fxml"));
+
+                Parent root = loader.load();
                 stage.setScene(new Scene(root));
                 stage.getIcons().add(new Image(getClass().getResourceAsStream("/images/clokesImg.png")));
                 stage.setTitle("alarms");
                 stage.show();
+                AlarmsWinController.setLocalController(loader.getController());
             } catch (IOException e) {
                 e.printStackTrace();
             }

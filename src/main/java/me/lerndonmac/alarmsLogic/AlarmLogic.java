@@ -56,8 +56,8 @@ public class AlarmLogic extends Application {
             if (!alarmsObserv.isEmpty()){
                 alarmsObserv.clear();
             }
-            try {
-                BufferedReader reader = new BufferedReader(new FileReader(getClass().getResource("/alarms/alarmlist0.alttx").getFile()));
+            try (BufferedReader reader = new BufferedReader(new FileReader(getClass().getResource("/alarms/alarmlist0.alttx").getFile()))){
+
                 while (reader.ready()) {
                     String alarm = reader.readLine();
                     String[] alarmParams = alarm.split("'");
