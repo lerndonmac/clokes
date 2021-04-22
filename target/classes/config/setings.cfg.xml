@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+    <entry key="notificationMinutesInterval">45</entry>
+    <entry key="notificationActive">1</entry>
+    <entry key="startUpActive">0</entry>
+    <entry key="shutDownTime">23:00</entry>
+    <entry key="shutDownActive">0</entry>
+</properties>
